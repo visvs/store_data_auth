@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const routerApi = require('./routes');
-
+//middlewares
 const { logErrors, errorHandler, boomErrorHandler } = require('./middlewares/error.handler');
 
 const app = express();
@@ -37,5 +37,5 @@ app.use(errorHandler);
 
 
 app.listen(port, () => {
-  console.log('Mi port' +  port);
+  console.log('Mi port ' +  port);
 });
