@@ -1,4 +1,5 @@
 //Configuracion base para leer variables de entorno
+require('dotenv').config();
 const config = {
   //Siempre tenemos disponible la variable de entorno para node
   env: process.env.NODE_ENV || 'dev',

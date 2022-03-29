@@ -34,7 +34,7 @@ class ProductsService {
   }
 
   async find() {
-    const query = 'SELECT * FROM tasks';
+    const query = 'SELECT * FROM task';
     const response = await this.pool.query(query);
     return response.rows;
   }

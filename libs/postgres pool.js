@@ -6,9 +6,8 @@ const USER = encodeURIComponent(config.dbUser);
 const PASSWORD = encodeURIComponent(config.dbPassword);
 //Al tener bases de datos remotas es comun que te den URI de conexion, como a continuacion
 //URI body: protocolo://${usuario}:${password}@${host}:${port}/${database}
-const URI = `postgres://${USER}:${PASSWORD}@${config.host}
-:${config.port}/${config.dbName}`
-
+const URI = `postgres://${USER}:${PASSWORD}@${config.dbHost}:${config.dbPort}/${config.dbName}`
+console.log(URI)
 //Conexion por parametros
 /*   const pool = new Pool({
     host: 'localhost',
