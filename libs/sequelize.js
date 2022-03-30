@@ -2,6 +2,7 @@
 const {Sequelize} = require('sequelize');
 
 const {config} = require('../config/config');
+const setupModels = require('../database/models/index');
 
 const USER = encodeURIComponent(config.dbUser);
 const PASSWORD = encodeURIComponent(config.dbPassword);
@@ -15,5 +16,8 @@ const sequelize = new Sequelize(URI,{
   //cada vez que se haga consulta por ORM se vera en SQL
   logging: true
 });
+setupModels(sequelize);
+//Sincroniza los modelos
+sequelize.sync();
 module.exports = sequelize;
 
