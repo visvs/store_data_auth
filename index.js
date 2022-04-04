@@ -30,11 +30,11 @@ app.get('/nueva-ruta', (req, res) => {
 });
 
 routerApi(app);
-
+//se ejecutan en orden los middlewares
 app.use(logErrors);
+app.use(queryErrorHandler);
 app.use(boomErrorHandler);
 app.use(errorHandler);
-app.use(queryErrorHandler);
 
 
 app.listen(port, () => {
