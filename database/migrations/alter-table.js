@@ -1,4 +1,4 @@
-'use strict';
+/* 'use strict';
 const {userSchema, USER_TABLE} = require('./../models/user.model')
 
 module.exports = {
@@ -12,3 +12,4 @@ module.exports = {
     await queryInterface.removeColumn(USER_TABLE, 'role');
   }
 };
+ */

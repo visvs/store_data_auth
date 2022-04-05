@@ -37,8 +37,9 @@ const CustomerSchema =  {
     unique: true,
     references: {
       model: USER_TABLE,
-      key: 'id'
+      key: 'id' //--> hacia donde va dirigida la referecia
     },
+    //reglas
     onUpdate: 'CASCADE',
     onDelete: 'SET NULL'
   }
@@ -47,6 +48,11 @@ const CustomerSchema =  {
 class Customer extends Model {
 
   static associate(models) {
+    //El peso de la relacion cae sobre User, si se usara la relacion HasOne el peso seria en customer,
+    //HasOne A --> B
+    //BelongsTo A <-- B
+    //Un customer tiene un usuario
+    //En esta relacion la foreign key va en el modelo de customer en este caso
     this.belongsTo(models.User, {as: 'user'});
   }
 

@@ -1,4 +1,4 @@
-const {Model, DataTypes, Sequelize} = require('sequelize');
+const {Model, DataTypes, Sequelize} = require('sequelize')
 
 const USER_TABLE = 'users';
 //Define el esquema y tipos de la tabla de users
@@ -34,8 +34,13 @@ const userSchema = {
 //Definimos la clase con el modelo creado
 class User extends Model {
   //definimos metodos static para acceder a los metodos sin declaracion
-  static associate(){
+  static associate(models){
     //Relaciones
+    //Dado que es hasOne, la relación esta del lado de la otra tabla (customer)
+    this.hasOne(models.Customer, {
+      as: 'customer',
+      foreignKey: 'userId'
+    })
   }
   static config(sequelize) {
     return {
