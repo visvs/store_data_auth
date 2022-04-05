@@ -23,6 +23,6 @@ const sequelize = new Sequelize(URI,{
 setupModels(sequelize);
 //Sincroniza los modelos --> lee los modelos y los crea
 //no se recomienda su uso en produccion
-sequelize.sync();
+//sequelize.sync();
 module.exports = sequelize;
 
