@@ -5,7 +5,7 @@ El proyecto es la continuación de un curso anterior de Platzi, por lo que se co
 
 Se desarrolla pensandolo en un entorno de producción por lo que se hace uso de migraciones del ORM, para tener un control de los cambios en la BD
 
-### Paquete para crear y ejecutar migraciones en Sequeliza
+### Paquete para crear y ejecutar migraciones en Sequelize
 
 El paquete cli de nos permitira hacer migraciones
 ```
