@@ -21,6 +21,13 @@ class CustomerService {
   }
 
   async create(data) {
+    //Forma 1 de crear usuario desde customer
+    /* const newUser = await models.User.create(data.user)
+    const newCustomer = await models.Customer.create({
+      ...data,
+      userId: newUser.id
+    }); */
+    //Forma 2
     const newCustomer = await models.Customer.create(data, {
       include: ['user']
     });
