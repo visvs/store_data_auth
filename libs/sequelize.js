@@ -20,7 +20,7 @@ dialect : 'postgres',
 logging: config.isProd ? false : true,
 }
 if(config.isProd) {
-  options.ssl = {
+  options.dialectOptions.ssl = {
     rejectUnauthorized: false
   }
 }

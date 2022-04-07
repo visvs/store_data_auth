@@ -2,8 +2,14 @@ const {Pool} = require('pg');
 
 const {config} = require('../config/config');
 let URI;
+const options  = {
+  connectionString: URI,
+}
 if(config.isProd){
   URI = config.dbURL;
+  options.dialectOptions.ssl = {
+    rejectUnauthorized: false
+  }
 }
 else {
   const USER = encodeURIComponent(config.dbUser);
@@ -21,9 +27,9 @@ else {
     database: 'my_store'
   }); */
   //Conexion por URI
-  const pool = new Pool({
-   connectionString: URI
-  });
+
+
+  const pool = new Pool();
 module.exports = {
   pool
 }
