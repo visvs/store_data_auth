@@ -2,12 +2,10 @@ const {Pool} = require('pg');
 
 const {config} = require('../config/config');
 let URI;
-const options  = {
-  connectionString: URI,
-}
+const options  = {}
 if(config.isProd){
-  URI = config.dbURL;
-  options.dialectOptions.ssl = {
+  options.connectionString = config.dbURL,
+  options.ssl = {
     rejectUnauthorized: false
   }
 }
@@ -16,8 +14,11 @@ else {
   const PASSWORD = encodeURIComponent(config.dbPassword);
   //Al tener bases de datos remotas es comun que te den URI de conexion, como a continuacion
   //URI body: protocolo://${usuario}:${password}@${host}:${port}/${database}
-  URI = `postgres://${USER}:${PASSWORD}@${config.dbHost}:${config.dbPort}/${config.dbName}`
+  URI = `postgres://${USER}:${PASSWORD}@${config.dbHost}:${config.dbPort}/${config.dbName}`;
+  options.connectionString = URI;
 }
+
+
 //Conexion por parametros
 /*   const pool = new Pool({
     host: 'localhost',
