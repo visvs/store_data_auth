@@ -1,9 +1,10 @@
 const express = require('express');
 const validatorHandler = require('../middlewares/validator.handler');
-const OrderService = require('../services/order.service')
+const service = require('../services/order.service')
 const {createOrderSchema, getOrderSchema, addItemSchema} = require('../schemas/order.schema')
 const router = express.Router();
 
+const OrderService = new service()
 router.get('/:id',
 validatorHandler(getOrderSchema, 'params'),
 async (req, res, next) => {

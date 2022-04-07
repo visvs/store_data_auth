@@ -20,6 +20,6 @@ function setupModels(sequelize){
   Product.associate(sequelize.models)
   //Orden tendra los productos (items)
   Order.associate(sequelize.models)
-  OrderProduct.associate(sequelize.models)
+  //OrderProduct.associate(sequelize.models)
 }
 module.exports = setupModels;
