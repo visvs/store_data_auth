@@ -13,7 +13,8 @@ const OrderSchena = {
   },
   status: {
     allowNull: false,
-    type: DataTypes.INTEGER
+    type: DataTypes.INTEGER,
+    defaultValue: 0
   },
   createdAt: {
     allowNull: false,
@@ -31,6 +32,17 @@ const OrderSchena = {
     },
     onUpdate: 'CASCADE',
     onDelete: 'SET NULL'
+  },
+  total: {
+    type: DataTypes.VIRTUAL,
+    get(){
+      if(this.items.length > 0){
+        return this.items.reduce((total, current) => {
+          return total + (current.price * current.OrderProduct.amount)
+        }, 0)
+      }
+      return 0;
+    }
   }
 }
 
@@ -38,8 +50,15 @@ const OrderSchena = {
 class Order extends Model {
 
   static associate(models) {
-    //Un producto pertenece a una categoria
+    //Una orden pertenece a un cliente
     this.belongsTo(models.Customer, { as: 'customer' });
+    //Una orden tiene muchos productos
+    this.belongsToMany(models.Product, {
+      as: 'items',
+      through: models.OrderProduct,
+      foreignKey: 'orderId',
+      otherKey: 'productId'
+    })
   }
 
   static config(sequelize) {
@@ -51,5 +70,4 @@ class Order extends Model {
     }
   }
 }
-
 module.exports = { Order, OrderSchena, ORDER_TABLE };
