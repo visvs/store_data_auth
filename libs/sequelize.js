@@ -20,8 +20,10 @@ let options = {
   logging: config.isProd ? false : true,
 }
 if(config.isProd) {
-  options.dialectOptions.ssl = {
-    rejectUnauthorized: false
+  options.dialectOptions = {
+    ssl: {
+      rejectUnauthorized: false
+    }
   }
 }
 //sequelize tiene integrada la estrategia de pooling

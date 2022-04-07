@@ -3,11 +3,11 @@ const {Pool} = require('pg');
 const {config} = require('../config/config');
 let URI;
 const options  = {}
-if(config.isProd){
-  options.connectionString = config.dbURL,
-  options.ssl = {
+if (config.isProd) {
+  options.connectionString = config.dbURL;
+  options.ssl =  {
     rejectUnauthorized: false
-  }
+  };
 }
 else {
   const USER = encodeURIComponent(config.dbUser);
