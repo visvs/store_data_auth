@@ -11,3 +11,8 @@ El paquete cli de nos permitira hacer migraciones
 ```
 npm install sequelize-cli --save-dev
 ```
+
+###Ejecutar migraciones en produccion (servidor en heroku)
+```
+heroku run npm run migrations:run
+```
