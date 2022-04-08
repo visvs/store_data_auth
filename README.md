@@ -16,3 +16,5 @@ npm install sequelize-cli --save-dev
 ```
 heroku run npm run migrations:run
 ```
+#### El proyecto se llevo a entorno productivo
+- [API](https://my-store-service.herokuapp.com/)
