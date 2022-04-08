@@ -22,7 +22,7 @@ const options = {
 app.use(cors(options));
 
 app.get('/', (req, res) => {
-  res.send('Hola mi server en express');
+  res.render('frontend')
 });
 
 app.get('/nueva-ruta', (req, res) => {
