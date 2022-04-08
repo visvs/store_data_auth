@@ -22,12 +22,10 @@ const options = {
 app.use(cors(options));
 
 app.get('/', (req, res) => {
-  res.send('Hola mi server en express');
+  res.send('API node.js con Postgres, consulta de usuarios, productos, categorias y más');
 });
 
-app.get('/nueva-ruta', (req, res) => {
-  res.send('Hola, soy una nueva ruta');
-});
+
 
 routerApi(app);
 //se ejecutan en orden los middlewares
