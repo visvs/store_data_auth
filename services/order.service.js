@@ -1,5 +1,4 @@
-//const boom = require('@hapi/boom');
-
+const boom = require('@hapi/boom');
 const {models} = require('../libs/sequelize')
 
 class OrderService {
@@ -26,9 +25,13 @@ class OrderService {
       include: [{
         association: 'customer',
         include: ['user']
-      }, 'items'
+      },
+      'items'
     ]
     });
+    if(!order){
+      throw boom.notFound('Order not found')
+    }
     return order;
   }
 
@@ -42,7 +45,9 @@ class OrderService {
   }
 
   async delete(id) {
-    return { id };
+    const order = await this.findOne(id);
+    await order.destroy();
+    return { res: true };
   }
 
 }

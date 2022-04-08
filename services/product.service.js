@@ -1,8 +1,8 @@
 const faker = require('faker');
-//const boom = require('@hapi/boom');
 const {pool} = require('../libs/postgres pool');
 const {models} = require('../libs/sequelize');
 const { Op } = require('sequelize');
+const { boom } = require('@hapi/boom');
 
 class ProductsService {
 
@@ -94,6 +94,9 @@ class ProductsService {
     const product = await models.Product.findByPk(id,{
       include: ['category']
     });
+    if(!product) {
+      throw boom.notFound('Product not found')
+    }
     return product;
   }
 
