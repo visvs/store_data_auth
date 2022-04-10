@@ -3,7 +3,8 @@ const cors = require('cors');
 const routerApi = require('./routes');
 //middlewares
 const { logErrors, errorHandler, boomErrorHandler } = require('./middlewares/error.handler');
-const {queryErrorHandler} = require('./middlewares/database.handler')
+const {queryErrorHandler} = require('./middlewares/database.handler');
+const { checkAPIKey } = require('./middlewares/auth.handler');
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -22,6 +23,9 @@ const options = {
 app.use(cors(options));
 
 app.get('/', (req, res) => {
+  res.send('API node.js con Postgres, consulta de usuarios, productos, categorias y más');
+});
+app.get('/test', checkAPIKey,(req, res) => {
   res.send('API node.js con Postgres, consulta de usuarios, productos, categorias y más');
 });
 
