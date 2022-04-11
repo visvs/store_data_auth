@@ -1,4 +1,6 @@
 const {Model, DataTypes, Sequelize} = require('sequelize')
+const bcrypy = require('bcrypt');
+
 
 const USER_TABLE = 'users';
 //Define el esquema y tipos de la tabla de users
@@ -47,7 +49,13 @@ class User extends Model {
       sequelize,
       tableName: USER_TABLE,
       modelName: 'User',
-      timestamps: false
+      timestamps: false,
+      hooks : {
+        beforeCreate: async (user, options) => {
+          const password = await bcrypy.hash(user.password, 10)
+          user.password = password;
+        }
+      }
     }
   }
 }

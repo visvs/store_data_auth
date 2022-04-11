@@ -1,5 +1,5 @@
 const boom = require('@hapi/boom');
-const bcrypy = require('bcrypt');
+//const bcrypy = require('bcrypt');
 
 
 //const {getConnection} = require('../libs/postgres');
@@ -8,11 +8,12 @@ class UserService {
   constructor() {}
 
   async create(data) {
-    const hash = await bcrypy.hash(data.password, 10);
+   /*  const hash = await bcrypy.hash(data.password, 10);
     const newUser = await models.User.create({
       ...data,
       password: hash
-    })
+    }) */
+    const newUser = await models.User.create(data);
     delete newUser.dataValues.password;
     return newUser;
   }
@@ -28,6 +29,15 @@ class UserService {
 
   async findOne(id) {
     const user = await models.User.findByPk(id);
+    if(!user){
+      throw boom.notFound('User not found');
+    }
+    return user;
+  }
+  async findByEmail(email) {
+    const user = await models.User.findOne({
+      where: {email}
+    });
     if(!user){
       throw boom.notFound('User not found');
     }

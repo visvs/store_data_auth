@@ -21,6 +21,7 @@ const options = {
   }
 }
 app.use(cors(options));
+require('./utils/auth/index');
 
 app.get('/', (req, res) => {
   res.send('API node.js con Postgres, consulta de usuarios, productos, categorias y más');
