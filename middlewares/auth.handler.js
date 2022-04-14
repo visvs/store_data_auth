@@ -11,5 +11,17 @@ const checkAPIKey = ( req, res, next) =>{
     next(boom.unauthorized())
   }
 }
+/**
+ * Middleware para verificar el rol del usuario
+ */
+const checkAdminRole = (req, res, next)=>{
+  const user = req.user;
+  console.log(user)
+  if(user.role === 'admin'){
+    next();
+  }else{
+    next(boom.unauthorized());
+  }
+}
 
-module.exports = {checkAPIKey}
+module.exports = {checkAPIKey, checkAdminRole}
