@@ -13,8 +13,25 @@ class OrderService {
     const newItem = await models.OrderProduct.create(data);
     return newItem;
   }
-
-  async find() {
+  async findByUser(userId) {
+    /**
+   * contamos con el userID pero no con el customerID
+   * por lo que se hace un where por asociaciones customer tiene un usuario, y usuario un id
+   */
+    const orders = await models.Order.findAll({
+      where: {
+        '$customer.user.id$': userId
+      },
+      include: [
+        {
+          association: 'customer',
+          include: ['user']
+        }
+      ]
+    });
+    return orders;
+  }
+  async findAll() {
     const orders = await models.Order.findAll();
     return orders;
   }

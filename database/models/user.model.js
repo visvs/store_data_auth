@@ -51,7 +51,7 @@ class User extends Model {
       modelName: 'User',
       timestamps: false,
       hooks : {
-        beforeCreate: async (user, options) => {
+        beforeCreate: async (user) => {
           const password = await bcrypy.hash(user.password, 10)
           user.password = password;
         }
