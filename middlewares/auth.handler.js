@@ -12,7 +12,7 @@ const checkAPIKey = ( req, res, next) =>{
   }
 }
 /**
- * Middleware para verificar el rol del usuario
+ * Middleware para verificar el rol admin del usuario
  */
 const checkAdminRole = (req, res, next)=>{
   const user = req.user;
@@ -24,4 +24,19 @@ const checkAdminRole = (req, res, next)=>{
   }
 }
 
-module.exports = {checkAPIKey, checkAdminRole}
+/**
+ * Middleware para verificar el rol del usuario
+ */
+ const checkRole = (...roles)=>{
+   return (req, res, next) =>{
+     const user = req.user;
+     if(roles.includes(user.role)){
+       next();
+     }
+     else{
+       next(boom.forbidden());
+     }
+   }
+}
+
+module.exports = {checkAPIKey, checkAdminRole, checkRole}
