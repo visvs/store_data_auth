@@ -1,4 +1,5 @@
 const express = require('express');
+const passport = require('passport');
 
 const CustomerService = require('../services/customer.service');
 const validationHandler = require('../middlewares/validator.handler');
@@ -7,11 +8,16 @@ const {
   getCustomerSchema,
   updateCustomerSchema,
 } = require('../schemas/customer.schema');
+const { checkRole } = require('../middlewares/auth.handler');
 
 const router = express.Router();
 const service = new CustomerService();
 
-router.get('/:id', validationHandler(getCustomerSchema, 'params'), async (req, res, next) => {
+router.get('/:id',
+passport.authenticate('jwt', {session: false}) ,
+checkRole('admin', 'seller'),
+validationHandler(getCustomerSchema, 'params'),
+async (req, res, next) => {
   try {
     const { id } = req.params;
     res.json(await service.findOne(id));
@@ -41,6 +47,8 @@ router.post('/',
 );
 
 router.patch('/:id',
+  passport.authenticate('jwt', {session: false}) ,
+  checkRole('customer'),
   validationHandler(getCustomerSchema, 'params'),
   validationHandler(updateCustomerSchema, 'body'),
   async (req, res, next) => {
@@ -55,6 +63,8 @@ router.patch('/:id',
 );
 
 router.delete('/:id',
+passport.authenticate('jwt', {session: false}) ,
+checkRole('admin', 'customer'),
   validationHandler(getCustomerSchema, 'params'),
   async (req, res, next) => {
     try {

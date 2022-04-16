@@ -9,8 +9,6 @@ const router = express.Router();
 const service = new CategoryService();
 
 router.get('/',
-passport.authenticate('jwt', {session: false}) ,
-checkRole('admin', 'seller','customer'),
  async (req, res, next) => {
   try {
     const categories = await service.find();
@@ -21,8 +19,6 @@ checkRole('admin', 'seller','customer'),
 });
 
 router.get('/:id',
-  passport.authenticate('jwt', {session: false}) ,
-  checkRole('admin', 'seller','customer'),
   validatorHandler(getCategorySchema, 'params'),
   async (req, res, next) => {
     try {
@@ -52,6 +48,8 @@ router.post('/',
 );
 
 router.patch('/:id',
+  passport.authenticate('jwt', {session: false}) ,
+  checkRole('admin', 'seller'),
   validatorHandler(getCategorySchema, 'params'),
   validatorHandler(updateCategorySchema, 'body'),
   async (req, res, next) => {
@@ -67,6 +65,8 @@ router.patch('/:id',
 );
 
 router.delete('/:id',
+  passport.authenticate('jwt', {session: false}) ,
+  checkRole('admin', 'seller'),
   validatorHandler(getCategorySchema, 'params'),
   async (req, res, next) => {
     try {
