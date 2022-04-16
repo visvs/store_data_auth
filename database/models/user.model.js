@@ -20,6 +20,11 @@ const userSchema = {
     allowNull: false,
     type: DataTypes.STRING
   },
+  recoveryToken: {
+    field: 'recovery_token',
+    allowNull: true,
+    type: DataTypes.STRING
+  },
   role: {
     allowNull: false,
     type: DataTypes.STRING,
@@ -52,6 +57,10 @@ class User extends Model {
       timestamps: false,
       hooks : {
         beforeCreate: async (user) => {
+          const password = await bcrypy.hash(user.password, 10)
+          user.password = password;
+        },
+        beforeUpdate : async(user) =>{
           const password = await bcrypy.hash(user.password, 10)
           user.password = password;
         }
