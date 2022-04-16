@@ -24,10 +24,10 @@ app.use(cors(options));
 require('./utils/auth/index');
 
 app.get('/', (req, res) => {
-  res.send('API node.js con Postgres, consulta de usuarios, productos, categorias y más');
+  res.send('API node.js con Postgres, consulta de usuarios, productos, categorias, autenticación,autorizacion por roles y más');
 });
 app.get('/test', checkAPIKey,(req, res) => {
-  res.send('API node.js con Postgres, consulta de usuarios, productos, categorias y más');
+  res.send('API node.js con Postgres, consulta de usuarios, productos, categorias, autenticación,autorizacion por roles y más');
 });
 
 
